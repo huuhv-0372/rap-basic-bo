@@ -1,0 +1,36 @@
+projection;
+strict ( 2 );
+use draft;
+
+
+define behavior for ZC_RAP_Travel_1999 alias Travel
+use etag
+{
+   use create;
+   use update;
+   use delete;
+
+   use association _Booking { create; }
+
+   use action acceptTravel;
+   use action rejectTravel;
+   use action trigger_all123;
+   use action Edit;
+   use action Activate;
+   use action Discard;
+   use action Resume;
+
+   use action Prepare;
+
+
+   side effects {  field BookingFee affects field TotalPrice; }
+ }
+
+define behavior for ZC_RAP_Booking_1999 alias Booking
+use etag
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+}
